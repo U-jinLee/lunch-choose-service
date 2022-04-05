@@ -52,11 +52,22 @@
         function placesSearchCB (data, status, pagination) {
             if (status === kakao.maps.services.Status.OK) {
                 for (var i=0; i<data.length; i++) {
-                    console.log(data[i])
+                    displayMarker(data[i]);
                 }
             }
         }
    })
    /***/
 
+   /*
+   * 찾은 식당 마커 찍기
+   */
+  function displayMarker(_place) {
+
+      let marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(_place.y, _place.x)
+        });
+      
+  }
 </script>
