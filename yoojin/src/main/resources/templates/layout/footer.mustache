@@ -3,14 +3,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bd4af7bf360a89358bf6e41e1f18f292&libraries=services"></script>
 <script type="text/javascript">
+    
+    $(function() {
+        countSelected();
+    });
+
+    function countSelected() {
+        let countNum = $("#select-restaurant ul li").length; 
+        $("#count-num").html(countNum);
+    }
+
+    $(document).on("click", "#select-restaurant ul li", function() {
+        $("#select-restaurant ul li").eq($(this).index()).remove();
+        countSelected();
+    })
+
+    $(document).on("click", ".restaurant-name", function() {
+
+        if($("#select-restaurant ul li").length >= 5) {         
+
+            alert("식당은 5개 이상 선택할 수 없습니다.");
+
+            return false;
+        };
+
+        let content = "<li>"+$(this).text()+"</li>";
+        $("#select-restaurant ul").append(content);
+
+        countSelected();
+    });
+
     /*
     * 맵 세팅
     */
     let container = document.getElementById("map");
     let options = {
         center: new kakao.maps.LatLng(37.516161, 127.0597355),
-        level:5
+        level:4
     }
+    
     let map = new kakao.maps.Map(container, options);
     /***/
     
@@ -62,12 +93,18 @@
    /*
    * 찾은 식당 마커 찍기
    */
-  function displayMarker(_place) {
+  let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
+  function displayMarker(_place) {
       let marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(_place.y, _place.x)
         });
-      
+
+    kakao.maps.event.addListener(marker, "mouseover", function() {
+        infowindow.setContent('<div style="padding:5px;font-size:12px;"><span class="restaurant-name">' + _place.place_name + '</span></div>');
+        infowindow.open(map, marker)
+    })
+
   }
 </script>
