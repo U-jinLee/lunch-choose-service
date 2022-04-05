@@ -3,6 +3,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bd4af7bf360a89358bf6e41e1f18f292&libraries=services"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
+=======
+    
+    $(function() {
+        countSelected();
+    });
+
+    function countSelected() {
+        let countNum = $("#select-restaurant ul li").length; 
+        $("#count-num").html(countNum);
+    }
+
+    $(document).on("click", "#select-restaurant ul li", function() {
+        $("#select-restaurant ul li").eq($(this).index()).remove();
+        countSelected();
+    })
+
+    $(document).on("click", ".restaurant-name", function() {
+
+        if($("#select-restaurant ul li").length >= 5) {         
+
+            alert("식당은 5개 이상 선택할 수 없습니다.");
+
+            return false;
+        };
+
+        let content = "<li>"+$(this).text()+"</li>";
+        $("#select-restaurant ul").append(content);
+
+        countSelected();
+    });
+
+>>>>>>> kakao-map-topic
     /*
     * 맵 세팅
     */
@@ -11,8 +44,13 @@
         center: new kakao.maps.LatLng(37.516161, 127.0597355),
         level:4
     }
+    
     let map = new kakao.maps.Map(container, options);
     /***/
+<<<<<<< HEAD
+=======
+    
+>>>>>>> kakao-map-topic
     /*
     * Geocoder 서비스 설정
     */
@@ -36,6 +74,7 @@
         }
     )
     /***/
+<<<<<<< HEAD
     /*
     * 음식점 검색
     */
@@ -55,4 +94,45 @@
 
 //    })
    
+=======
+
+    /*
+    * 음식점 검색
+    */
+   $("#event-button").on("click", function() {
+        // 장소 검색 객체를 생성합니다
+        let places = new kakao.maps.services.Places(map);
+
+        // 카테고리로 은행을 검색합니다
+        places.categorySearch('FD6', placesSearchCB, {useMapBounds:true});
+
+        // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+        function placesSearchCB (data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
+                for (var i=0; i<data.length; i++) {
+                    displayMarker(data[i]);
+                }
+            }
+        }
+   })
+   /***/
+
+   /*
+   * 찾은 식당 마커 찍기
+   */
+  let infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+  function displayMarker(_place) {
+      let marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(_place.y, _place.x)
+        });
+
+    kakao.maps.event.addListener(marker, "mouseover", function() {
+        infowindow.setContent('<div style="padding:5px;font-size:12px;"><span class="restaurant-name">' + _place.place_name + '</span></div>');
+        infowindow.open(map, marker)
+    })
+
+  }
+>>>>>>> kakao-map-topic
 </script>
