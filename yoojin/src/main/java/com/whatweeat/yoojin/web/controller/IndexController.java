@@ -1,4 +1,4 @@
-package com.whatweeat.yoojin.controller;
+package com.whatweeat.yoojin.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

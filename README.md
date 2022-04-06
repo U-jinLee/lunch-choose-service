@@ -4,6 +4,7 @@
 - Spring Web
 - H2 DB
 - Spring Data JPA
+- Spring Security
 - Mustache
 - Lombok
 ## Kakao API
