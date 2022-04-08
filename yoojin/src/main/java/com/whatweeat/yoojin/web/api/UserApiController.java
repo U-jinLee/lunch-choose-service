@@ -21,7 +21,7 @@ public class UserApiController {
      * @param requestDto 회원정보
      * @return ResponseEntity 201 Created, requestDto.getId()
      * */
-    @PostMapping({"", "/"})
+    @PostMapping("")
     public ResponseEntity<Long> save(@RequestBody UserRequestDto requestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userSignUpService.save(requestDto));
     }
