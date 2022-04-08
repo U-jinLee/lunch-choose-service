@@ -5,6 +5,7 @@ import com.whatweeat.yoojin.web.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Getter
@@ -29,5 +30,9 @@ public class UserRequestDto {
                     .password(password)
                     .role(Role.USER)
                 .build();
+    }
+
+    public void encodePassword(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.password = bCryptPasswordEncoder.encode(this.password);
     }
 }

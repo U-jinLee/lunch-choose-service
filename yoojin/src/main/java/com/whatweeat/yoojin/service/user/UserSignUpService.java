@@ -2,6 +2,7 @@ package com.whatweeat.yoojin.service.user;
 import com.whatweeat.yoojin.web.domain.user.UserRepository;
 import com.whatweeat.yoojin.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,9 +11,12 @@ import javax.transaction.Transactional;
 @Service
 public class UserSignUpService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public long save(UserRequestDto requestDto) {
+        requestDto.encodePassword(bCryptPasswordEncoder);
         return userRepository.save(requestDto.toEntity()).getId();
     }
+
 }
