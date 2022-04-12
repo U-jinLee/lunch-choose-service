@@ -22,17 +22,13 @@ public class UserRequestDto {
         this.password = password;
     }
 
-    public User toEntity() {
+    public User toEntity(BCryptPasswordEncoder bCryptPasswordEncoder) {
         return User
                 .builder()
                     .username(username)
                     .email(email)
-                    .password(password)
+                    .password(bCryptPasswordEncoder.encode(password))
                     .role(Role.USER)
                 .build();
-    }
-
-    public void encodePassword(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.password = bCryptPasswordEncoder.encode(this.password);
     }
 }

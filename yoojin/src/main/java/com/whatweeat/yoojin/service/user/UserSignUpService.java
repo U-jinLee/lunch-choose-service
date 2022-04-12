@@ -15,8 +15,7 @@ public class UserSignUpService {
 
     @Transactional
     public long save(UserRequestDto requestDto) {
-        requestDto.encodePassword(bCryptPasswordEncoder);
-        return userRepository.save(requestDto.toEntity()).getId();
+        return userRepository.save(requestDto.toEntity(bCryptPasswordEncoder)).getId();
     }
 
 }
