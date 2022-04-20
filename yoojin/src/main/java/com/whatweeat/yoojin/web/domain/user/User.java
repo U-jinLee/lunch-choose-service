@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
+    @Column(name = "USER_ID",updatable = false)
     private long id;
 
     @Column(nullable = false)
