@@ -1,5 +1,6 @@
-package com.whatweeat.yoojin.web.domain;
+package com.whatweeat.yoojin.web.domain.list;
 
+import com.whatweeat.yoojin.web.domain.BaseTimeEntity;
 import com.whatweeat.yoojin.web.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +12,17 @@ import javax.persistence.*;
 @Entity
 public class List extends BaseTimeEntity {
     @Id @GeneratedValue
-    @Column(name = "LIST_ID",updatable = false)
+    @Column(name = "LIST_ID", updatable = false)
     private long id;
 
-    @OneToOne @JoinColumn(name = "USER_ID")
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
     private User user;
 
+    @Column
     private String restaurant;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Active active;
 }
