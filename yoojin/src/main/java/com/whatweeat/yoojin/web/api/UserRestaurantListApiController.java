@@ -3,7 +3,6 @@ package com.whatweeat.yoojin.web.api;
 import com.whatweeat.yoojin.service.UserRestaurantListGetService;
 import com.whatweeat.yoojin.service.UserRestaurantListSaveService;
 import com.whatweeat.yoojin.web.dto.RestaurantRequestDto;
-import com.whatweeat.yoojin.web.dto.UserRestaurantRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class UserRestaurantListApiController {
      * */
     @GetMapping("")
     public void findUserRestaurantList() {
-
+        // I will soon make this controller function
     }
 
     /**
